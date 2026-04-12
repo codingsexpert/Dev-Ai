@@ -24,7 +24,7 @@ services:
       - key: SANDBOX_DIR
         value: ./sandboxes
 
-  - type: static_site
+  - type: static
     name: ai-dev-team-dashboard
     rootDir: dashboard
     buildCommand: npm install && npm run build
