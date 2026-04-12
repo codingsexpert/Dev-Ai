@@ -1,0 +1,10 @@
+node_modules/
+dashboard/node_modules/
+.env
+.DS_Store
+dist/
+coverage/
+sandboxes/
+*.log
+npm-debug.log*
+dashboard/dist/

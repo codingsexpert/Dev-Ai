@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: ai-dev-team-api
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: npm install
+    startCommand: npm run server
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: SERVER_PORT
+        value: "10000"
+      - key: FRONTEND_URL
+        sync: false
+      - key: TOKEN_BUDGET
+        value: "2.0"
+      - key: REDIS_URL
+        sync: false
+      - key: SANDBOX_DIR
+        value: ./sandboxes
+
+  - type: static_site
+    name: ai-dev-team-dashboard
+    rootDir: dashboard
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    pullRequestPreviewsEnabled: true
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+      - key: VITE_WS_URL
+        sync: false
