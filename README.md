@@ -61,6 +61,17 @@ Or interactive mode:
 node src/index.js
 ```
 
+### Docker mode
+
+```bash
+docker compose up --build
+```
+
+Then open:
+
+- `http://localhost:5173` for the dashboard
+- `http://localhost:3000/api/health` for backend health
+
 ## Test Commands
 
 ```bash

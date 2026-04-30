@@ -1,6 +1,7 @@
 node_modules/
 dashboard/node_modules/
 .env
+dashboard/.env
 .DS_Store
 dist/
 coverage/

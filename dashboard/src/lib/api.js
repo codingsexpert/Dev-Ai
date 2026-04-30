@@ -11,8 +11,10 @@ function getBaseUrl() {
   }
 
   if (typeof window !== "undefined") {
-    const { protocol, hostname } = window.location;
+    const { protocol, hostname, port } = window.location;
     if (hostname === "localhost" || hostname === "127.0.0.1") {
+      // When the dashboard is served by Vite, prefer same-origin proxying.
+      if (port === "5173") return "/api";
       return "http://localhost:3000/api";
     }
     return `${protocol}//${hostname.replace(/^www\./, "")}/api`;
@@ -29,7 +31,14 @@ async function request(path, options = {}) {
     ...options,
   });
 
-  const data = await res.json();
+  const raw = await res.text();
+  let data = null;
+
+  try {
+    data = raw ? JSON.parse(raw) : {};
+  } catch {
+    throw new Error(raw || `HTTP ${res.status}`);
+  }
 
   if (!res.ok) {
     throw new Error(data.error || `HTTP ${res.status}`);

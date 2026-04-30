@@ -25,7 +25,8 @@ function getWebSocketBaseUrl() {
   if (typeof window !== "undefined") {
     const { protocol, host, hostname } = window.location;
     if (hostname === "localhost" || hostname === "127.0.0.1") {
-      return "ws://localhost:3000";
+      const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
+      return `${wsProtocol}//${host}`;
     }
     const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
     return `${wsProtocol}//${host.replace(/^www\./, "")}`;

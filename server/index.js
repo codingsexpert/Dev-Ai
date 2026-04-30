@@ -105,6 +105,14 @@ async function start() {
   }
 
   // 2. Start server
+  server.on("error", (error) => {
+    console.error("   ❌ Server listen failed:", error.message);
+    if (error.code === "EADDRINUSE") {
+      console.error(`   Port ${PORT} is already in use. Stop the other process or change SERVER_PORT.`);
+    }
+    process.exit(1);
+  });
+
   server.listen(PORT, () => {
     console.log(`   ✅ REST API:    http://localhost:${PORT}/api`);
     console.log(`   ✅ WebSocket:   ws://localhost:${PORT}/ws`);

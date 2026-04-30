@@ -1,0 +1,33 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: ai-dev-team-backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      SERVER_PORT: 3000
+      FRONTEND_URL: http://localhost:5173
+      REDIS_URL: ""
+    volumes:
+      - ./sandboxes:/app/sandboxes
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: ai-dev-team-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: /api
+      VITE_WS_URL: ws://localhost:5173
+      VITE_PROXY_TARGET: http://backend:3000
+      VITE_WS_PROXY_TARGET: ws://backend:3000
+    depends_on:
+      - backend
+    restart: unless-stopped
