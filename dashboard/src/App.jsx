@@ -20,84 +20,64 @@ export default function App() {
 
   return (
     <div className="app">
-      <header className="header">
-        <div className="header-content">
-          <div className="logo">
-            <div className="logo-icon">AI</div>
-            <div className="logo-text">
-              <h1>DevAI</h1>
-              <p>Autonomous Development Studio</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       <main className="main">
-        <div className="hero-section">
-          <div className="hero-content">
-            <h2 className="hero-title">Build Faster with AI</h2>
-            <p className="hero-desc">Describe what you want to build and let our AI team handle the rest</p>
-          </div>
-        </div>
-
         <div className="container">
-          <div className="input-section">
-            <div className="input-wrapper">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Describe your project idea..."
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSend();
-                  }
-                }}
-                className="input"
-                disabled={isLoading}
-              />
-              <button
-                onClick={handleSend}
-                disabled={!input.trim() || isLoading}
-                className="send-btn"
-              >
-                {isLoading ? (
-                  <>
-                    <span className="spinner"></span>
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    <span className="send-icon">→</span>
-                    Launch
-                  </>
-                )}
-              </button>
+          <div className="content-wrapper">
+            <div className="hero-section">
+              <h1 className="hero-title">Build with AI</h1>
+              <p className="hero-desc">Turn your ideas into production-ready applications instantly</p>
             </div>
-            <p className="input-hint">Press Enter or click Launch to start building</p>
-          </div>
 
-          <div className="features">
-            <div className="feature-item">
-              <div className="feature-icon">⚡</div>
-              <div className="feature-text">
-                <h3>Lightning Fast</h3>
-                <p>Get your project built in minutes</p>
+            <div className="input-section">
+              <div className="input-container">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Describe what you want to build..."
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSend();
+                    }
+                  }}
+                  className="main-input"
+                  disabled={isLoading}
+                />
+                <button
+                  onClick={handleSend}
+                  disabled={!input.trim() || isLoading}
+                  className="submit-btn"
+                  aria-label="Submit"
+                >
+                  {isLoading ? (
+                    <span className="spinner"></span>
+                  ) : (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  )}
+                </button>
               </div>
+              <p className="input-help">Press Enter or click to submit</p>
             </div>
-            <div className="feature-item">
-              <div className="feature-icon">🤖</div>
-              <div className="feature-text">
-                <h3>AI Powered</h3>
-                <p>27 specialized AI agents working together</p>
+
+            <div className="features-grid">
+              <div className="feature-card">
+                <div className="feature-number">01</div>
+                <h3 className="feature-title">Instant Creation</h3>
+                <p className="feature-desc">Build your entire project in seconds</p>
               </div>
-            </div>
-            <div className="feature-item">
-              <div className="feature-icon">📊</div>
-              <div className="feature-text">
-                <h3>Real-time Updates</h3>
-                <p>Watch your project build live</p>
+              <div className="feature-card">
+                <div className="feature-number">02</div>
+                <h3 className="feature-title">AI Engineers</h3>
+                <p className="feature-desc">27 specialized AI agents collaborate seamlessly</p>
+              </div>
+              <div className="feature-card">
+                <div className="feature-number">03</div>
+                <h3 className="feature-title">Live Updates</h3>
+                <p className="feature-desc">Watch your project come to life in real-time</p>
               </div>
             </div>
           </div>
